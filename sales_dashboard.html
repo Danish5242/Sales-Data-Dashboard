@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sales Dashboard 2025</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #161921;
+    --surface2: #1e2230;
+    --border: #2a2f3d;
+    --accent: #4f8ef7;
+    --accent2: #7c5af0;
+    --accent3: #29d4a3;
+    --accent4: #f5a623;
+    --text: #e8eaf0;
+    --muted: #8a8fa8;
+    --positive: #29d4a3;
+    --chart-grid: rgba(255,255,255,0.05);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--text);
+  }
+
+  header h1 span {
+    color: var(--accent);
+  }
+
+  .header-meta {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(79,142,247,0.15);
+    color: var(--accent);
+    border: 1px solid rgba(79,142,247,0.3);
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    letter-spacing: 0.5px;
+  }
+
+  main {
+    padding: 28px 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* KPI STRIP */
+  .kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .kpi:hover { border-color: rgba(79,142,247,0.4); }
+
+  .kpi::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .kpi:nth-child(1)::before { background: var(--accent); }
+  .kpi:nth-child(2)::before { background: var(--positive); }
+  .kpi:nth-child(3)::before { background: var(--accent2); }
+  .kpi:nth-child(4)::before { background: var(--accent4); }
+  .kpi:nth-child(5)::before { background: #f46a6a; }
+
+  .kpi-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .kpi-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .kpi-sub {
+    font-size: 12px;
+    color: var(--positive);
+    font-weight: 500;
+  }
+
+  /* GRID LAYOUT */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  /* CHART CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+  }
+
+  .card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--muted);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-title .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .chart-wrap {
+    position: relative;
+  }
+
+  /* SALESPERSON TABLE */
+  .sp-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .sp-table th {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--muted);
+    text-align: left;
+    padding: 8px 0 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sp-table th:not(:first-child) { text-align: right; }
+
+  .sp-table td {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  .sp-table tr:last-child td { border-bottom: none; }
+
+  .sp-table td:not(:first-child) { text-align: right; }
+
+  .sp-name {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .sp-rev { color: var(--accent); font-weight: 600; }
+  .sp-profit { color: var(--positive); }
+  .sp-units { color: var(--muted); }
+
+  .progress-bar {
+    height: 4px;
+    background: var(--border);
+    border-radius: 100px;
+    margin-top: 6px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 100px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 11px;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Sales <span>Dashboard</span></h1>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge">FY 2025</span>
+    <span class="header-meta">48 transactions · 4 regions · 4 salespersons</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- KPI STRIP -->
+  <div class="kpi-strip">
+    <div class="kpi">
+      <div class="kpi-label">Net Revenue</div>
+      <div class="kpi-value">$642.5K</div>
+      <div class="kpi-sub">↑ Full Year 2025</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Gross Profit</div>
+      <div class="kpi-value">$344.0K</div>
+      <div class="kpi-sub">↑ 53.5% margin</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Units Sold</div>
+      <div class="kpi-value">2,223</div>
+      <div class="kpi-sub">Across all categories</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Avg Discount</div>
+      <div class="kpi-value">5.8%</div>
+      <div class="kpi-sub">Across all orders</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Best Quarter</div>
+      <div class="kpi-value">Q4</div>
+      <div class="kpi-sub">$218.9K revenue</div>
+    </div>
+  </div>
+
+  <!-- ROW 1: Monthly Revenue (wide) + Quarterly -->
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Monthly Net Revenue</div>
+      <div class="chart-wrap" style="height:220px">
+        <canvas id="monthlyChart"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--accent2)"></span>Quarterly Breakdown</div>
+      <div class="chart-wrap" style="height:220px">
+        <canvas id="quarterChart"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--accent4)"></span>Customer Segment</div>
+      <div class="chart-wrap" style="height:220px">
+        <canvas id="segmentChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: Region + Category -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--positive)"></span>Revenue by Region</div>
+      <div class="chart-wrap" style="height:220px">
+        <canvas id="regionChart"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:#f46a6a"></span>Revenue by Product Category</div>
+      <div class="chart-wrap" style="height:220px">
+        <canvas id="categoryChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: Salesperson Table -->
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--accent4)"></span>Salesperson Performance</div>
+    <table class="sp-table">
+      <thead>
+        <tr>
+          <th>Salesperson</th>
+          <th>Net Revenue</th>
+          <th>Gross Profit</th>
+          <th>Units Sold</th>
+          <th>Revenue Share</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="sp-name">Alice Johnson</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+          </td>
+          <td class="sp-rev">$184,605</td>
+          <td class="sp-profit">$89,210</td>
+          <td class="sp-units">332</td>
+          <td style="color:var(--muted)">28.7%</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="sp-name">Carol Lee</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:93.5%"></div></div>
+          </td>
+          <td class="sp-rev">$172,559</td>
+          <td class="sp-profit">$97,489</td>
+          <td class="sp-units">680</td>
+          <td style="color:var(--muted)">26.9%</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="sp-name">David Kim</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:80.1%"></div></div>
+          </td>
+          <td class="sp-rev">$147,960</td>
+          <td class="sp-profit">$83,337</td>
+          <td class="sp-units">644</td>
+          <td style="color:var(--muted)">23.0%</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="sp-name">Bob Smith</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:74.4%"></div></div>
+          </td>
+          <td class="sp-rev">$137,423</td>
+          <td class="sp-profit">$73,988</td>
+          <td class="sp-units">567</td>
+          <td style="color:var(--muted)">21.4%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<footer>Sales Dashboard 2025 · Generated from sales_2025.csv · 48 orders across 4 regions</footer>
+
+<script>
+const GRID = 'rgba(255,255,255,0.05)';
+const MUTED = '#8a8fa8';
+
+Chart.defaults.color = MUTED;
+Chart.defaults.borderColor = GRID;
+Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.font.size = 12;
+
+// MONTHLY
+new Chart(document.getElementById('monthlyChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    datasets: [{
+      data: [40830,42330,39768,49245,47434,39053,52317,71583,41126,71089,65622,82151],
+      backgroundColor: (ctx) => {
+        const g = ctx.chart.ctx.createLinearGradient(0,0,0,200);
+        g.addColorStop(0,'rgba(79,142,247,0.85)');
+        g.addColorStop(1,'rgba(79,142,247,0.2)');
+        return g;
+      },
+      borderRadius: 5,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: {
+      callbacks: { label: ctx => ' $' + ctx.parsed.y.toLocaleString() }
+    }},
+    scales: {
+      x: { grid: { color: GRID }, ticks: { color: MUTED }},
+      y: { grid: { color: GRID }, ticks: { color: MUTED, callback: v => '$' + (v/1000).toFixed(0) + 'K' }}
+    }
+  }
+});
+
+// QUARTERLY
+new Chart(document.getElementById('quarterChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Q1','Q2','Q3','Q4'],
+    datasets: [{
+      data: [122928, 135731, 165026, 218862],
+      backgroundColor: ['rgba(124,90,240,0.7)','rgba(124,90,240,0.75)','rgba(124,90,240,0.82)','rgba(124,90,240,0.95)'],
+      borderRadius: 6,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: {
+      callbacks: { label: ctx => ' $' + ctx.parsed.y.toLocaleString() }
+    }},
+    scales: {
+      x: { grid: { color: GRID }},
+      y: { grid: { color: GRID }, ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' }}
+    }
+  }
+});
+
+// SEGMENT DOUGHNUT
+new Chart(document.getElementById('segmentChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Enterprise','Retail','SMB'],
+    datasets: [{
+      data: [313610, 167894, 161043],
+      backgroundColor: ['#4f8ef7','#29d4a3','#7c5af0'],
+      borderColor: '#161921',
+      borderWidth: 3,
+      hoverOffset: 6
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    cutout: '65%',
+    plugins: {
+      legend: { position: 'bottom', labels: { color: MUTED, padding: 14, usePointStyle: true, pointStyleWidth: 8 }},
+      tooltip: { callbacks: { label: ctx => ' $' + ctx.parsed.toLocaleString() }}
+    }
+  }
+});
+
+// REGION
+new Chart(document.getElementById('regionChart'), {
+  type: 'bar',
+  data: {
+    labels: ['North','East','West','South'],
+    datasets: [{
+      label: 'Net Revenue',
+      data: [184605, 172559, 147960, 137423],
+      backgroundColor: ['rgba(41,212,163,0.85)','rgba(41,212,163,0.7)','rgba(41,212,163,0.55)','rgba(41,212,163,0.4)'],
+      borderRadius: 5,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: {
+      callbacks: { label: ctx => ' $' + ctx.parsed.x.toLocaleString() }
+    }},
+    scales: {
+      x: { grid: { color: GRID }, ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' }},
+      y: { grid: { color: 'transparent' }}
+    }
+  }
+});
+
+// CATEGORY
+new Chart(document.getElementById('categoryChart'), {
+  type: 'pie',
+  data: {
+    labels: ['Electronics','Software','Furniture','Accessories'],
+    datasets: [{
+      data: [280049, 172200, 97425, 92873],
+      backgroundColor: ['#4f8ef7','#f5a623','#29d4a3','#f46a6a'],
+      borderColor: '#161921',
+      borderWidth: 3,
+      hoverOffset: 6
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'bottom', labels: { color: MUTED, padding: 14, usePointStyle: true, pointStyleWidth: 8 }},
+      tooltip: { callbacks: { label: ctx => ' $' + ctx.parsed.toLocaleString() + ' (' + (ctx.parsed / 642546 * 100).toFixed(1) + '%)' }}
+    }
+  }
+});
+</script>
+</body>
+</html>
