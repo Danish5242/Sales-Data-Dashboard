@@ -1,0 +1,49 @@
+Order ID,Date,Month,Quarter,Salesperson,Region,Product Category,Product Name,Units Sold,Unit Price (USD),Total Revenue (USD),Discount (%),Net Revenue (USD),Cost of Goods (USD),Gross Profit (USD),Customer Name,Customer Segment
+ORD-001,2025-01-05,January,Q1,Alice Johnson,North,Electronics,Laptop Pro 15,12,1200.00,14400.00,5,13680.00,8640.00,5040.00,TechCorp Ltd,Enterprise
+ORD-002,2025-01-12,January,Q1,Bob Smith,South,Furniture,Ergonomic Chair,30,350.00,10500.00,10,9450.00,5250.00,4200.00,HomeBase Inc,SMB
+ORD-003,2025-01-20,January,Q1,Carol Lee,East,Software,CRM Suite (Annual),5,2400.00,12000.00,0,12000.00,3000.00,9000.00,Nexus Corp,Enterprise
+ORD-004,2025-01-28,January,Q1,David Kim,West,Accessories,Wireless Keyboard,80,75.00,6000.00,5,5700.00,2400.00,3300.00,RetailMax,Retail
+ORD-005,2025-02-03,February,Q1,Alice Johnson,North,Electronics,Monitor 27",25,450.00,11250.00,8,10350.00,5625.00,4725.00,StartupX,SMB
+ORD-006,2025-02-10,February,Q1,Bob Smith,South,Electronics,Laptop Pro 15,8,1200.00,9600.00,5,9120.00,5760.00,3360.00,GlobalTrade,Enterprise
+ORD-007,2025-02-18,February,Q1,Carol Lee,East,Accessories,USB-C Hub,120,45.00,5400.00,10,4860.00,1800.00,3060.00,MicroDeal,Retail
+ORD-008,2025-02-25,February,Q1,David Kim,West,Software,Project Manager Pro,10,1800.00,18000.00,0,18000.00,4500.00,13500.00,AlphaSystems,Enterprise
+ORD-009,2025-03-04,March,Q1,Alice Johnson,North,Furniture,Standing Desk,20,600.00,12000.00,10,10800.00,6000.00,4800.00,TechCorp Ltd,Enterprise
+ORD-010,2025-03-11,March,Q1,Bob Smith,South,Accessories,Noise Cancelling Headset,50,120.00,6000.00,5,5700.00,2500.00,3200.00,HomeBase Inc,SMB
+ORD-011,2025-03-19,March,Q1,Carol Lee,East,Electronics,Tablet 10",35,499.00,17465.00,8,16067.80,8732.50,7335.30,RetailMax,Retail
+ORD-012,2025-03-27,March,Q1,David Kim,West,Software,CRM Suite (Annual),3,2400.00,7200.00,0,7200.00,1800.00,5400.00,Nexus Corp,Enterprise
+ORD-013,2025-04-02,April,Q2,Alice Johnson,North,Electronics,Laptop Pro 15,15,1200.00,18000.00,5,17100.00,10800.00,6300.00,StartupX,SMB
+ORD-014,2025-04-09,April,Q2,Bob Smith,South,Furniture,Ergonomic Chair,40,350.00,14000.00,10,12600.00,7000.00,5600.00,GlobalTrade,Enterprise
+ORD-015,2025-04-17,April,Q2,Carol Lee,East,Accessories,Wireless Keyboard,100,75.00,7500.00,5,7125.00,3000.00,4125.00,AlphaSystems,Enterprise
+ORD-016,2025-04-24,April,Q2,David Kim,West,Electronics,Monitor 27",30,450.00,13500.00,8,12420.00,6750.00,5670.00,MicroDeal,Retail
+ORD-017,2025-05-06,May,Q2,Alice Johnson,North,Software,Project Manager Pro,7,1800.00,12600.00,0,12600.00,3150.00,9450.00,TechCorp Ltd,Enterprise
+ORD-018,2025-05-13,May,Q2,Bob Smith,South,Accessories,USB-C Hub,150,45.00,6750.00,10,6075.00,2250.00,3825.00,HomeBase Inc,SMB
+ORD-019,2025-05-21,May,Q2,Carol Lee,East,Electronics,Tablet 10",45,499.00,22455.00,8,20658.60,11227.50,9431.10,RetailMax,Retail
+ORD-020,2025-05-29,May,Q2,David Kim,West,Furniture,Standing Desk,15,600.00,9000.00,10,8100.00,4500.00,3600.00,Nexus Corp,Enterprise
+ORD-021,2025-06-04,June,Q2,Alice Johnson,North,Accessories,Noise Cancelling Headset,60,120.00,7200.00,5,6840.00,3000.00,3840.00,StartupX,SMB
+ORD-022,2025-06-11,June,Q2,Bob Smith,South,Software,CRM Suite (Annual),6,2400.00,14400.00,0,14400.00,3600.00,10800.00,GlobalTrade,Enterprise
+ORD-023,2025-06-19,June,Q2,Carol Lee,East,Electronics,Laptop Pro 15,10,1200.00,12000.00,5,11400.00,7200.00,4200.00,AlphaSystems,Enterprise
+ORD-024,2025-06-27,June,Q2,David Kim,West,Accessories,Wireless Keyboard,90,75.00,6750.00,5,6412.50,2700.00,3712.50,MicroDeal,Retail
+ORD-025,2025-07-03,July,Q3,Alice Johnson,North,Electronics,Monitor 27",28,450.00,12600.00,8,11592.00,6300.00,5292.00,TechCorp Ltd,Enterprise
+ORD-026,2025-07-10,July,Q3,Bob Smith,South,Furniture,Ergonomic Chair,35,350.00,12250.00,10,11025.00,6125.00,4900.00,HomeBase Inc,SMB
+ORD-027,2025-07-18,July,Q3,Carol Lee,East,Software,Project Manager Pro,12,1800.00,21600.00,0,21600.00,5400.00,16200.00,RetailMax,Retail
+ORD-028,2025-07-26,July,Q3,David Kim,West,Accessories,USB-C Hub,200,45.00,9000.00,10,8100.00,3000.00,5100.00,Nexus Corp,Enterprise
+ORD-029,2025-08-05,August,Q3,Alice Johnson,North,Electronics,Tablet 10",40,499.00,19960.00,8,18363.20,9980.00,8383.20,StartupX,SMB
+ORD-030,2025-08-12,August,Q3,Bob Smith,South,Software,CRM Suite (Annual),8,2400.00,19200.00,0,19200.00,4800.00,14400.00,GlobalTrade,Enterprise
+ORD-031,2025-08-20,August,Q3,Carol Lee,East,Electronics,Laptop Pro 15,18,1200.00,21600.00,5,20520.00,12960.00,7560.00,AlphaSystems,Enterprise
+ORD-032,2025-08-28,August,Q3,David Kim,West,Furniture,Standing Desk,25,600.00,15000.00,10,13500.00,7500.00,6000.00,MicroDeal,Retail
+ORD-033,2025-09-04,September,Q3,Alice Johnson,North,Accessories,Noise Cancelling Headset,70,120.00,8400.00,5,7980.00,3500.00,4480.00,TechCorp Ltd,Enterprise
+ORD-034,2025-09-11,September,Q3,Bob Smith,South,Electronics,Monitor 27",22,450.00,9900.00,8,9108.00,4950.00,4158.00,HomeBase Inc,SMB
+ORD-035,2025-09-19,September,Q3,Carol Lee,East,Accessories,Wireless Keyboard,110,75.00,8250.00,5,7837.50,3300.00,4537.50,RetailMax,Retail
+ORD-036,2025-09-27,September,Q3,David Kim,West,Software,Project Manager Pro,9,1800.00,16200.00,0,16200.00,4050.00,12150.00,Nexus Corp,Enterprise
+ORD-037,2025-10-03,October,Q4,Alice Johnson,North,Electronics,Laptop Pro 15,20,1200.00,24000.00,5,22800.00,14400.00,8400.00,StartupX,SMB
+ORD-038,2025-10-10,October,Q4,Bob Smith,South,Furniture,Ergonomic Chair,50,350.00,17500.00,10,15750.00,8750.00,7000.00,GlobalTrade,Enterprise
+ORD-039,2025-10-18,October,Q4,Carol Lee,East,Accessories,USB-C Hub,180,45.00,8100.00,10,7290.00,2700.00,4590.00,AlphaSystems,Enterprise
+ORD-040,2025-10-26,October,Q4,David Kim,West,Electronics,Tablet 10",55,499.00,27445.00,8,25249.40,13722.50,11526.90,MicroDeal,Retail
+ORD-041,2025-11-04,November,Q4,Alice Johnson,North,Software,CRM Suite (Annual),10,2400.00,24000.00,0,24000.00,6000.00,18000.00,TechCorp Ltd,Enterprise
+ORD-042,2025-11-11,November,Q4,Bob Smith,South,Electronics,Monitor 27",38,450.00,17100.00,8,15732.00,8550.00,7182.00,HomeBase Inc,SMB
+ORD-043,2025-11-19,November,Q4,Carol Lee,East,Furniture,Standing Desk,30,600.00,18000.00,10,16200.00,9000.00,7200.00,RetailMax,Retail
+ORD-044,2025-11-27,November,Q4,David Kim,West,Accessories,Noise Cancelling Headset,85,120.00,10200.00,5,9690.00,4250.00,5440.00,Nexus Corp,Enterprise
+ORD-045,2025-12-03,December,Q4,Alice Johnson,North,Electronics,Laptop Pro 15,25,1200.00,30000.00,5,28500.00,18000.00,10500.00,StartupX,SMB
+ORD-046,2025-12-10,December,Q4,Bob Smith,South,Accessories,Wireless Keyboard,130,75.00,9750.00,5,9262.50,3900.00,5362.50,GlobalTrade,Enterprise
+ORD-047,2025-12-18,December,Q4,Carol Lee,East,Software,Project Manager Pro,15,1800.00,27000.00,0,27000.00,6750.00,20250.00,AlphaSystems,Enterprise
+ORD-048,2025-12-26,December,Q4,David Kim,West,Electronics,Monitor 27",42,450.00,18900.00,8,17388.00,9450.00,7938.00,MicroDeal,Retail
